@@ -36,6 +36,9 @@ function generateInterface (pos) {
     const sourceDiv = document.getElementById ("source");
     
     function HighlightedChar (props) {
+	if (props.children === undefined || props.children.length === 0) {
+	    return <b>{"There needs to be at last one string passed in as a child to HighlightedChar"}</b>
+	}
 	return <span className={props.className}>
 	    {props.children}
 	    </span>
@@ -59,4 +62,13 @@ function generateInterface (pos) {
     ReactDOM.render (sourceCodeDiv, sourceDiv);
 }
 
-generateInterface (3);
+var position = 0;
+function regen () {
+    if (position < sourceString.length) {
+	position = position + 1;
+	generateInterface (position);
+    }
+}
+
+setInterval (regen, 1000);
+
