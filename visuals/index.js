@@ -34,9 +34,16 @@ const sourceString = "var hi = 'hello there';";
 
 function generateInterface (pos) {
     const sourceDiv = document.getElementById ("source");
-
-    const HighlightedChar = (props) => <span className={props.className}>{props.children}</span>
     
+    function HighlightedChar (props) {
+	return <span className={props.className}>
+	    {props.children}
+	    </span>
+    }
+
+    HighlightedChar.propTypes = {
+	className : PropTypes.string.isRequired
+    }
     
     var beginningOfSource = sourceString.substring (0, pos - 1);
     var charToBeHighlighted = sourceString.substring (pos - 1, pos);
@@ -44,7 +51,9 @@ function generateInterface (pos) {
     
     const sourceCodeProps = {
 	className : "sourceCode",
-	children : [beginningOfSource, <HighlightedChar className="highlight" children={charToBeHighlighted} />, restOfSource]
+	children : [beginningOfSource,
+		    <HighlightedChar className="highlight" children={charToBeHighlighted} />,
+		    restOfSource]
     }
     const sourceCodeDiv = <div {...sourceCodeProps} />
     ReactDOM.render (sourceCodeDiv, sourceDiv);
