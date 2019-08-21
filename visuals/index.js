@@ -44,6 +44,10 @@ function generateInterface (pos) {
 	    </span>
     }
 
+    function ScanSourceButton (props) {
+	return <button onClick={scanChars}>{props.children}</button>
+    }
+
     HighlightedChar.propTypes = {
 	className : PropTypes.string.isRequired
     }
@@ -58,8 +62,12 @@ function generateInterface (pos) {
 		    <HighlightedChar className="highlight" children={charToBeHighlighted} />,
 		    restOfSource]
     }
-    const sourceCodeDiv = <div {...sourceCodeProps} />
-    ReactDOM.render (sourceCodeDiv, sourceDiv);
+    
+    const sourceCodeDiv = <div {...sourceCodeProps} />;
+    const buttonDiv = <div children={[<ScanSourceButton children="Scan Source" />]} />;
+    ReactDOM.render ([sourceCodeDiv, buttonDiv], sourceDiv);
+
+    //ReactDOM.render (buttonDiv, sourceDiv);
 }
 
 var position = 0;
@@ -70,5 +78,9 @@ function regen () {
     }
 }
 
-setInterval (regen, 1000);
+function scanChars () {
+    // begin scanning of chars
+    setInterval (regen, 500);
+}
 
+generateInterface (1);
