@@ -1,4 +1,5 @@
 const sourceString = "var hi = 'hello there';";
+var scanning = false;
 
 function generateInterface (pos) {
     const sourceDiv = document.getElementById ("source");
@@ -40,15 +41,22 @@ function generateInterface (pos) {
 
 var position = 0;
 function regen () {
-    if (position < sourceString.length) {
-	position = position + 1;
-	generateInterface (position);
+    if (scanning) {
+	if (position < sourceString.length) {
+	    position = position + 1;
+	    generateInterface (position);
+	}
     }
 }
 
 function scanChars () {
     // begin scanning of chars
-    setInterval (regen, 500);
+    if (!scanning) {
+	scanning = true;
+	setInterval (regen, 500);
+    } else {
+	scanning = false;
+    }
 }
 
 generateInterface (1);
