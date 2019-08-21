@@ -9,7 +9,7 @@ let _hadRuntimeError = false;
  * Error reporting mechanism for the interpreter.
  */
 class LoxError {
-
+// turn all current highlighted chars a shade of red
   /**
    * Whether or not an error occurred during scanning or parsing.
    *
