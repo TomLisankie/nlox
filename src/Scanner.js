@@ -26,19 +26,27 @@ const KEYWORDS = {
 /**
  * Converts Lox source code into a series of {@link Token}s.
  */
+
+// Look at comments in a few of the methods for notes on what to do in the corresponding visualization
 class Scanner {
   _isAtEnd() {
-    return this._current >= this._source.length;
+      return this._current >= this._source.length;
+
+      // for now, just stop and show all tokens but soon start the parsing process
   }
 
   _advance() {
     this._current++;
-    return this._source[this._current - 1];
+      return this._source[this._current - 1];
+
+      // make the next character highlighted
   }
 
   _addToken(type, literal) {
     const text = this._source.slice(this._start, this._current);
-    this._tokens.push(new Token(type, text, literal, this._line));
+      this._tokens.push(new Token(type, text, literal, this._line));
+
+      // create a small box containing the token keyword with a background color for the box corresponding to the keyword used
   }
 
   _match(expected) {
@@ -64,6 +72,8 @@ class Scanner {
     else {
       return this._source[this._current + ahead];
     }
+
+      // show a faded highlight on the character following the current one
   }
 
   _slash() {
@@ -75,6 +85,8 @@ class Scanner {
     else {
       this._addToken(TokenType.SLASH);
     }
+
+      // do a special highlight?
   }
 
   _string(closingQuote) {
@@ -95,7 +107,9 @@ class Scanner {
 
     const stringLiteral = this._source.slice(this._start + 1, this._current - 1);
 
-    this._addToken(TokenType.STRING, stringLiteral);
+      this._addToken(TokenType.STRING, stringLiteral);
+
+      // do a special highlight?
   }
 
   static _isDigit(c) {
@@ -144,7 +158,7 @@ class Scanner {
 
   _scanToken() {
     const c = this._advance();
-
+    // make each kind of case have its own color?
     switch(c) {
       case '(':
         this._addToken(TokenType.LEFT_PAREN);
