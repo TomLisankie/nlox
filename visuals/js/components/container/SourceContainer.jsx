@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import SourceTextArea from "../presentational/SourceTextArea.jsx";
 
 class SourceContainer extends Component {
     constructor () {
@@ -13,7 +14,12 @@ class SourceContainer extends Component {
 
     render () {
 	return (
-	    <div className="source-container"> </div>
+	    <div className="source-container">
+	      <SourceTextArea
+		rows={40}
+		cols={50}
+		defaultText="var hi = 'hello there';" />
+	    </div>
 	);
     }
     
