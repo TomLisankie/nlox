@@ -25,4 +25,9 @@ class SourceContainer extends Component {
     
 }
 
+
+
 export default SourceContainer;
+
+const wrapper = document.getElementById ("source");
+wrapper ? ReactDOM.render (<SourceContainer />, wrapper) : false;
