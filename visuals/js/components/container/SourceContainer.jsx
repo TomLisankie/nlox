@@ -4,6 +4,8 @@ import SourceTextArea from "../presentational/SourceTextArea.jsx";
 import Button from "../presentational/Button.jsx";
 import SourceDiv from "../presentational/SourceDiv.jsx";
 
+import Scanner from "../../../../src/Scanner.js";
+
 class SourceContainer extends Component {
     constructor () {
 	super ();
@@ -46,6 +48,10 @@ function beginScanning () {
 
     hideTextArea ();
     showSourceDiv ();
+
+    const scanner = new Scanner ();
+    scanner.scanTokens (document.querySelector (".source-text-area").value);
+    // start up scanner
     // start highlighting
 }
 
