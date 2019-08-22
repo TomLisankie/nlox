@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import SourceTextArea from "../presentational/SourceTextArea.jsx";
 import Button from "../presentational/Button.jsx";
+import SourceDiv from "../presentational/SourceDiv.jsx";
 
 class SourceContainer extends Component {
     constructor () {
@@ -20,8 +21,11 @@ class SourceContainer extends Component {
 		rows={10}
 		columns={60}
 		defaultText="var hi = 'hello there';" />
+	      <SourceDiv
+		style="display:none;"
+		text="" />
 	      <Button
-		onClickFunc={hideTextArea}
+		onClickFunc={beginScanning}
 		text={"Scan source"} />
 	    </div>
 	);
@@ -29,10 +33,21 @@ class SourceContainer extends Component {
     
 }
 
-function hideTextArea () {
-    document.querySelector (".source-text-area").setAttribute ("style", "display:none;");
-}
+function beginScanning () {
+    function hideTextArea () {
+	document.querySelector (".source-text-area").setAttribute ("style", "display:none;");
+    }
 
+    function showSourceDiv () {
+	const sourceDiv = document.querySelector (".source-div");
+	sourceDiv.setAttribute ("style", "display:block;");
+	sourceDiv.innerHTML = document.querySelector (".source-text-area").value;
+    }
+
+    hideTextArea ();
+    showSourceDiv ();
+    // start highlighting
+}
 
 
 export default SourceContainer;
