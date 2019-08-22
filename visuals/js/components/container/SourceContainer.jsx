@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import SourceTextArea from "../presentational/SourceTextArea.jsx";
+import Button from "../presentational/Button.jsx";
 
 class SourceContainer extends Component {
     constructor () {
@@ -16,13 +17,20 @@ class SourceContainer extends Component {
 	return (
 	    <div className="source-container">
 	      <SourceTextArea
-		rows={40}
-		cols={50}
+		rows={10}
+		columns={60}
 		defaultText="var hi = 'hello there';" />
+	      <Button
+		onClickFunc={hideTextArea}
+		text={"Scan source"} />
 	    </div>
 	);
     }
     
+}
+
+function hideTextArea () {
+    document.querySelector (".source-text-area").setAttribute ("style", "display:none;");
 }
 
 

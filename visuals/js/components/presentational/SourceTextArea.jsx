@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const SourceTextArea = function ({defaultText, rows, columns}) {
     return (
-	<textarea autofocus rows={rows} cols={columns} placeholder={defaultText}>
+	<textarea autoFocus className={"source-text-area"} rows={rows} cols={columns} placeholder={defaultText}>
 	  </textarea>
     );
 }
