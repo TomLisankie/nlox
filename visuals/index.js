@@ -1,3 +1,5 @@
+const Scanner = require ("../src/Scanner");
+
 const sourceString = "var hi = 'hello there';";
 var scanning = false;
 
@@ -60,3 +62,9 @@ function scanChars () {
 }
 
 generateInterface (1);
+
+/* basically what has to happen is:
+1. Interface tells scanner to begin scanning
+2. Scanner begins scanning and exports its state to some data structure in between the web interface and the scanner
+3. Interface checks to see if there are updates to the shared data structure and updates accordingly
+*/
