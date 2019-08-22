@@ -12,4 +12,6 @@ SourceTextArea.propTypes = {
     rows : PropTypes.number.isRequired,
     columns : PropTypes.number.isRequired,
     defaultText : PropTypes.string.isRequired
-}
+};
+
+export default SourceTextArea;
