@@ -35,6 +35,7 @@
     "jshint": "^2.10.2",
     "lolex": "^1.6.0",
     "mach.js": "^0.4.0",
+    "prop-types": "^15.7.2",
     "proxyquire": "^1.8.0",
     "run-sequence": "^1.2.2",
     "webpack": "^4.39.2",
