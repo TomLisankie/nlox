@@ -50,6 +50,7 @@ function beginScanning () {
     showSourceDiv ();
 
     const scanner = new Scanner ();
+    console.log (scanner.shelf);
     scanner.scanTokens (document.querySelector (".source-text-area").value);
     // start up scanner
     // start highlighting

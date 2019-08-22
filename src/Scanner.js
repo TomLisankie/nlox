@@ -4,7 +4,7 @@ const LoxError = require('./LoxError');
 const Token = require('./Token');
 const TokenType = require('./TokenType');
 
-const Shelf = require ("./Shelf");
+const Shelf = require ("./Shelf").default; //Babel assigns default exports to the default property. This is necessary when using `require` to import an ES6 module. https://stackoverflow.com/a/36389244/353715
 
 const KEYWORDS = {
   'and': TokenType.AND,
@@ -31,6 +31,11 @@ const KEYWORDS = {
 
 // Look at comments in a few of the methods for notes on what to do in the corresponding visualization
 class Scanner {
+
+    constructor () {
+	this.shelf = new Shelf ();
+    }
+    
   _isAtEnd() {
       return this._current >= this._source.length;
 
