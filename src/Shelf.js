@@ -54,6 +54,10 @@ class Shelf {
 	    }
 	);
     }
+
+    getNextState () {
+	this.states.dequeue ();
+    }
     
 }
 
