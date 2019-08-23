@@ -54,7 +54,11 @@ function beginScanning () {
     // Source has now been scanned and tokens lexed out
     // Job of interface is to visually replicate the state at every point where there was a change to the state.
     console.log (scanner.shelf);
-    // start up scanner
+    const numOfStates = scanner.shelf.states.getLength ();
+    for (var i = 0; i < numOfStates; i++) {
+	const currentState = scanner.shelf.getNextState ();
+	//construct render with corresponding characters highlighted
+    }
     // start highlighting
 }
 
