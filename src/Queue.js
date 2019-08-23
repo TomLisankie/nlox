@@ -16,6 +16,10 @@ class Queue {
     peekFront () {
 	return this.list [0];
     }
+
+    getLength () {
+	return this.list.length;
+    }
     
 }
 
