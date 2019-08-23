@@ -12,6 +12,10 @@ class Queue {
     dequeue () {
 	this.list.shift ();
     }
+
+    peekFront () {
+	return this.list [0];
+    }
     
 }
 

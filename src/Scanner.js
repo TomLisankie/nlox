@@ -52,7 +52,7 @@ class Scanner {
 
   _addToken(type, literal) {
       const text = this._source.slice(this._start, this._current);
-      this.shelf.addPeekedIndex (text);
+      this.shelf.addToken (text);
       this._tokens.push(new Token(type, text, literal, this._line));
 
       // create a small box containing the token keyword with a background color for the box corresponding to the keyword used
@@ -66,7 +66,8 @@ class Scanner {
       return false;
     }
 
-    this._current++;
+      this._current++;
+      this.shelf.addCurrentIndex (this._current);
     return true;
   }
 
@@ -78,8 +79,9 @@ class Scanner {
     if(this._current + ahead >= this._source.length) {
       return '\0';
     }
-    else {
-      return this._source[this._current + ahead];
+      else {
+	  this.shelf.addPeekedIndex (this._current + ahead);
+	  return this._source[this._current + ahead];
     }
 
       // show a faded highlight on the character following the current one

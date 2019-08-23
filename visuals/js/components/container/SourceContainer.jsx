@@ -50,8 +50,10 @@ function beginScanning () {
     showSourceDiv ();
 
     const scanner = new Scanner ();
-    console.log (scanner.shelf);
     scanner.scanTokens (document.querySelector (".source-text-area").value);
+    // Source has now been scanned and tokens lexed out
+    // Job of interface is to visually replicate the state at every point where there was a change to the state.
+    console.log (scanner.shelf);
     // start up scanner
     // start highlighting
 }
