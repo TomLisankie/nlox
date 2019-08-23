@@ -44,7 +44,7 @@ class Scanner {
 
   _advance() {
       this._current++;
-      console.log (this._source[this._current - 1]);
+      this.shelf.addCurrentIndex (this._current);
       return this._source[this._current - 1];
 
       // make the next character highlighted
@@ -52,7 +52,7 @@ class Scanner {
 
   _addToken(type, literal) {
       const text = this._source.slice(this._start, this._current);
-      console.log (text);
+      this.shelf.addPeekedIndex (text);
       this._tokens.push(new Token(type, text, literal, this._line));
 
       // create a small box containing the token keyword with a background color for the box corresponding to the keyword used
