@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const HighlightedChar = function ({className, character}) {
     return (
-	<span className={props.className}> {props.character} </span>
+	<span className={className}> {character} </span>
     );
 }
 
