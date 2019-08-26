@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import SourceTextArea from "../presentational/SourceTextArea.jsx";
 import Button from "../presentational/Button.jsx";
-import SourceDiv from "../presentational/SourceDiv.jsx";
+import SourceDiv from "./SourceDiv.jsx";
 import HighlightedChar from "../presentational/HighlightedChar.jsx";
 
 import Scanner from "../../../../src/Scanner.js";
@@ -45,8 +45,7 @@ class SourceContainer extends Component {
 		  this.state.scanning ?
 		      <div className="scanning">
 		      <SourceDiv
-			    style={{display : "block"}}
-			    text={document.querySelector(".source-text-area").value} indexOfCharToHighlight={3} />
+			    text={document.querySelector(".source-text-area").value} initiallyHighlightedIndex={1}/>
 			  <Button
 				    onClickFunc={this.editAndRestartButtonClicked}
 				    text={"Edit source and restart"} />
