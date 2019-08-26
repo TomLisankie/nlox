@@ -27,7 +27,7 @@ class SourceContainer extends Component {
 	    console.log (scanner.shelf);
 	    const numOfStates = scanner.shelf.states.getLength ();
 	    for (var i = 0; i < numOfStates; i++) {
-		const currentState = scanner.shelf.getNextState ();
+		//const currentState = scanner.shelf.getNextState ();
 		//construct render with corresponding characters highlighted
 	    }
 
