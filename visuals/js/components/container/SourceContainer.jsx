@@ -33,7 +33,7 @@ class SourceContainer extends Component {
 
 	}
 
-	this.pauseButtonClicked = () => {
+	this.editAndRestartButtonClicked = () => {
 	    this.setState ({scanning : false});
 	}
     }
@@ -48,8 +48,8 @@ class SourceContainer extends Component {
 			    style={{display : "block"}}
 			    text={document.querySelector(".source-text-area").value} indexOfCharToHighlight={3} />
 			  <Button
-				    onClickFunc={this.pauseButtonClicked}
-				    text={"Pause scanning"} />
+				    onClickFunc={this.editAndRestartButtonClicked}
+				    text={"Edit source and restart"} />
 			  </div>
 			  :
 			  <div className="editing">
