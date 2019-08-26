@@ -41,7 +41,7 @@ class SourceDiv extends React.Component {
 	return (
 	    <div className={"source-div"}>
 	      {beginningOfSource}
-	      <HighlightedChar className="highlight" character={charToBeHighlighted} />
+	      <HighlightedChar className="highlight-current" character={charToBeHighlighted} />
 	      {restOfSource}
 	    </div>
 	);
