@@ -17,22 +17,24 @@ class SourceContainer extends Component {
 
 	this.scanButtonClicked = () => {
 
-	    if (this.state.scanning) {
-		this.setState ({scanning : false});
-	    } else {
-		this.setState({scanning : true});
-		const scanner = new Scanner ();
-		scanner.scanTokens (document.querySelector (".source-text-area").value);
-		// Source has now been scanned and tokens lexed out
-		// Job of interface is to visually replicate the state at every point where there was a change to the state.
-		console.log (scanner.shelf);
-		const numOfStates = scanner.shelf.states.getLength ();
-		for (var i = 0; i < numOfStates; i++) {
-		    const currentState = scanner.shelf.getNextState ();
-		    //construct render with corresponding characters highlighted
-		}
+	    this.setState({scanning : true});
+
+	    
+	    const scanner = new Scanner ();
+	    scanner.scanTokens (document.querySelector (".source-text-area").value);
+	    // Source has now been scanned and tokens lexed out
+	    // Job of interface is to visually replicate the state at every point where there was a change to the state.
+	    console.log (scanner.shelf);
+	    const numOfStates = scanner.shelf.states.getLength ();
+	    for (var i = 0; i < numOfStates; i++) {
+		const currentState = scanner.shelf.getNextState ();
+		//construct render with corresponding characters highlighted
 	    }
 
+	}
+
+	this.pauseButtonClicked = () => {
+	    this.setState ({scanning : false});
 	}
     }
 
@@ -41,18 +43,25 @@ class SourceContainer extends Component {
 	    <div className="source-container">
 	      {
 		  this.state.scanning ?
+		      <div className="scanning">
 		      <SourceDiv
 			    style={{display : "block"}}
 			    text={document.querySelector(".source-text-area").value} indexOfCharToHighlight={3} />
+			  <Button
+				    onClickFunc={this.pauseButtonClicked}
+				    text={"Pause scanning"} />
+			  </div>
 			  :
+			  <div className="editing">
 			  <SourceTextArea
 				rows={10}
 				columns={60}
 				defaultText="var hi = 'hello there';" />
+			      <Button
+				    onClickFunc={this.scanButtonClicked}
+				    text={"Scan source"} />
+			      </div>
 	      }
-	      <Button
-		onClickFunc={this.scanButtonClicked}
-		text={"Scan source"} />
 	    </div>
 	);
     }
