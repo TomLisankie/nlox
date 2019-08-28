@@ -33,15 +33,15 @@ class Shelf {
     
 
     getNextIndex () {
-	this.currentIndices.dequeue ();
+	return this.currentIndices.dequeue ();
     }
 
     getPeekedIndex () {
-	this.peekedIndices.dequeue ();
+	return this.peekedIndices.dequeue ();
     }
 
     getNextToken () {
-	this.newTokens.dequeue ();
+	return this.newTokens.dequeue ();
     }
 
 
@@ -56,7 +56,7 @@ class Shelf {
     }
 
     getNextState () {
-	this.states.dequeue ();
+	return this.states.dequeue ();
     }
     
 }

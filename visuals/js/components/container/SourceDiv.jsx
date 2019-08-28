@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import HighlightedChar from "../presentational/HighlightedChar.jsx";
+import Scanner from "../../../../src/Scanner.js";
 
 class SourceDiv extends React.Component {
 
@@ -12,18 +13,21 @@ class SourceDiv extends React.Component {
 	    currentlyHighlighted : props.initiallyHighlightedIndex
 	};
 
+	this.scanner = new Scanner ();
+
 	this.advanceHighlight = () => {
 	    if (this.state.currentlyHighlighted >= this.props.text.length) {
 		return;
 	    }
 	    this.setState ({
-		currentlyHighlighted : this.state.currentlyHighlighted + 1
+		currentlyHighlighted : this.scanner.shelf.getNextState ().currentIndex
 	    });
 	}
 	
     }
 
     componentDidMount () {
+	this.scanner.scanTokens (this.props.text);
 	this.advanceHighlightInterval = setInterval (() => this.advanceHighlight(), 500);
     }
 
@@ -32,6 +36,7 @@ class SourceDiv extends React.Component {
     }
 
     render () {
+	
 	var beginningOfSource = this.props.text.substring (0, this.state.currentlyHighlighted - 1);
 	var charToBeHighlighted = this.props.text.substring (this.state.currentlyHighlighted - 1, this.state.currentlyHighlighted);
 	var restOfSource =  this.props.text.substring (this.state.currentlyHighlighted);
