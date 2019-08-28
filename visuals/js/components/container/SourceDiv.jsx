@@ -19,7 +19,6 @@ class SourceDiv extends React.Component {
 	    if (this.state.currentlyHighlighted >= this.props.text.length) {
 		return;
 	    }
-	    console.log (this.scanner.shelf.getNextState);
 	    this.setState ({
 		currentlyHighlighted : this.scanner.shelf.getNextState ().currentIndex
 	    });

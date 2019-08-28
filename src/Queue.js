@@ -10,7 +10,7 @@ class Queue {
     }
 
     dequeue () {
-	this.list.shift ();
+	return this.list.shift ();
     }
 
     peekFront () {
