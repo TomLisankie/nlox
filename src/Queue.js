@@ -17,6 +17,10 @@ class Queue {
 	return this.list [0];
     }
 
+    peekEnd () {
+	return this.list [this.list.length - 1];
+    }
+
     getLength () {
 	return this.list.length;
     }

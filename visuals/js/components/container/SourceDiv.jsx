@@ -11,6 +11,7 @@ class SourceDiv extends React.Component {
 
 	this.state = {
 	    currentlyHighlighted : props.initiallyHighlightedIndex
+	    
 	};
 
 	this.scanner = new Scanner ();
@@ -19,8 +20,11 @@ class SourceDiv extends React.Component {
 	    if (this.state.currentlyHighlighted >= this.props.text.length) {
 		return;
 	    }
+	    let nextState = this.scanner.shelf.getNextState ();
 	    this.setState ({
-		currentlyHighlighted : this.scanner.shelf.getNextState ().currentIndex
+		currentlyHighlighted : nextState.currentIndex,
+		peek : nextState.peeked,
+		peekHighlight : nextState.peekIndex
 	    });
 	}
 	
@@ -28,7 +32,7 @@ class SourceDiv extends React.Component {
 
     componentDidMount () {
 	this.scanner.scanTokens (this.props.text);
-	this.advanceHighlightInterval = setInterval (() => this.advanceHighlight(), 500);
+	this.advanceHighlightInterval = setInterval (() => this.advanceHighlight (), 500);
     }
 
     componentWillUnmount () {
@@ -38,15 +42,17 @@ class SourceDiv extends React.Component {
     render () {
 	
 	var beginningOfSource = this.props.text.substring (0, this.state.currentlyHighlighted - 1);
-	var charToBeHighlighted = this.props.text.substring (this.state.currentlyHighlighted - 1, this.state.currentlyHighlighted);
-	var restOfSource =  this.props.text.substring (this.state.currentlyHighlighted);
-
-	console.log (charToBeHighlighted);
+	var currentCharToBeHighlighted = this.props.text.substring (this.state.currentlyHighlighted - 1, this.state.currentlyHighlighted);
+	var peekChar = this.props.text.substring (this.state.peekHighlight, this.state.peekHighlight + 1);
+	var restOfSource = this.state.peek ? this.props.text.substring (this.state.currentlyHighlighted + 1) : this.props.text.substring (this.state.currentlyHighlighted);
 	
 	return (
 	    <div className={"source-div"}>
 	      {beginningOfSource}
-	      <HighlightedChar className="highlight-current" character={charToBeHighlighted} />
+	      {this.state.peek ? <React.Fragment><HighlightedChar className="highlight-current" character={currentCharToBeHighlighted} />
+		<HighlightedChar className="highlight-peek" character={peekChar} /> </React.Fragment>
+		  : <HighlightedChar className="highlight-current" character={currentCharToBeHighlighted} />
+	      }
 	      {restOfSource}
 	    </div>
 	);
