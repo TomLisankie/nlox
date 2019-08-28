@@ -1,4 +1,5 @@
 import React from "react";
+import TokenBox from "../presentational/TokenBox.jsx";
 
 class TokenDiv extends React.Component {
     
@@ -9,7 +10,7 @@ class TokenDiv extends React.Component {
     render () {
 	return (
 	    <div className="token-div">
-	      Tokens will appear here.
+	      <TokenBox color="lightblue" tokenText="OOOOOOOOOOOOOOOOOOOOOOOO" />
 	    </div>
 	);
     }
