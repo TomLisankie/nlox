@@ -50,7 +50,7 @@ class SourceContainer extends Component {
 	    const textAreaVal = document.querySelector(".source-text-area").value;
 	    scanner.scanTokens (textAreaVal);
 
-	    this.advanceStateInterval = setInterval (() => this.advanceState (textAreaVal, scanner.shelf), 500);
+	    this.advanceStateInterval = setInterval (() => this.advanceState (textAreaVal, scanner.shelf), 350);
 	    
 	}
 	
