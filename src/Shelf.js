@@ -18,17 +18,17 @@ class Shelf {
 
     addCurrentIndex (index) {
 	this.currentIndices.enqueue (index);
-	this.addState (index, false, this.peekedIndices.peekEnd (), this.newTokens.peekFront ());
+	this.addState (index, false, this.peekedIndices.peekEnd (), false, this.newTokens.peekFront ());
     }
 
     addPeekedIndex (index) {
 	this.peekedIndices.enqueue (index);
-	this.addState (this.currentIndices.peekEnd (), true, index, this.newTokens.peekEnd ());
+	this.addState (this.currentIndices.peekEnd (), true, index, false, this.newTokens.peekEnd ());
     }
 
     addToken (token) {
 	this.newTokens.enqueue (token);
-	this.addState (this.currentIndices.peekEnd (), false, this.peekedIndices.peekEnd (), token);
+	this.addState (this.currentIndices.peekEnd (), false, this.peekedIndices.peekEnd (), true, token);
     }
     
 
@@ -45,13 +45,14 @@ class Shelf {
     }
 
 
-    addState (currentIndex, peeked, peekIndex, mostRecentToken) {
+    addState (currentIndex, peeked, peekIndex, wasNewToken, mostRecentToken) {
 	this.states.enqueue (
 	    {
 		currentIndex : currentIndex,
 		peeked : peeked,
 		peekIndex : peekIndex,
-		token : mostRecentToken
+		wasNewToken : wasNewToken,
+		tokenText : mostRecentToken
 	    }
 	);
     }
