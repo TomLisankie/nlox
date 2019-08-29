@@ -36,7 +36,8 @@ class Scanner {
 	this.shelf = new Shelf ();
     }
     
-  _isAtEnd() {
+    _isAtEnd() {
+	console.log (this.shelf);
       return this._current >= this._source.length;
 
       // for now, just stop and show all tokens but soon start the parsing process
@@ -52,8 +53,9 @@ class Scanner {
 
   _addToken(type, literal) {
       const text = this._source.slice(this._start, this._current);
-      this.shelf.addToken (text);
-      this._tokens.push(new Token(type, text, literal, this._line));
+      const newToken = new Token(type, text, literal, this._line);
+      this.shelf.addToken (newToken);
+      this._tokens.push(newToken);
 
       // create a small box containing the token keyword with a background color for the box corresponding to the keyword used
   }
