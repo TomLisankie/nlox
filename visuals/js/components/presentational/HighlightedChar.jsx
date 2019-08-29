@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const HighlightedChar = function ({className, character}) {
     return (
-	<span className={className}> {character} </span>
+	<span className={className} style={{"font-size" : "30px"}}> {character} </span>
     );
 }
 

@@ -26,7 +26,7 @@ class SourceDiv extends React.Component {
 	var restOfSource = this.props.peek ? this.props.text.substring (this.props.currentHighlightIndex + 1) : this.props.text.substring (this.props.currentHighlightIndex);
 	
 	return (
-	    <div className={"source-div"}>
+	    <div className={"source-div"} style={{"font-size" : "20px"}}>
 	      {beginningOfSource}
 	      {this.props.peek ? <React.Fragment><HighlightedChar className="highlight-current" character={currentCharToBeHighlighted} />
 		<HighlightedChar className="highlight-peek" character={peekChar} /> </React.Fragment>
