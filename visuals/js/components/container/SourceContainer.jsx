@@ -28,8 +28,8 @@ class SourceContainer extends Component {
 		const nextState = theShelf.getNextState ();
 
 		let currentTokens = this.state.tokens;
-		if (this.props.wasNewToken) {
-		    currentTokens.push (this.props.tokenText)
+		if (nextState.wasNewToken) {
+		    currentTokens.push (nextState.tokenText)
 		    console.log ("Current Tokens: ", currentTokens);
 		}
 		
@@ -59,7 +59,8 @@ class SourceContainer extends Component {
 	    clearInterval (this.advanceStateInterval);
 	    this.setState ({
 		scanning : false,
-		shelf : null
+		shelf : null,
+		tokens : []
 	    });
 	}
     }
