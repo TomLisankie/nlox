@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import HighlightedChar from "../presentational/HighlightedChar.jsx";
+import TokenBox from "../presentational/TokenBox.jsx";
+
 import Scanner from "../../../../src/Scanner.js";
 
 class SourceDiv extends React.Component {
@@ -24,7 +26,9 @@ class SourceDiv extends React.Component {
 	    this.setState ({
 		currentlyHighlighted : nextState.currentIndex,
 		peek : nextState.peeked,
-		peekHighlight : nextState.peekIndex
+		peekHighlight : nextState.peekIndex,
+		wasNewToken : nextState.wasNewToken,
+		tokenText : nextState.tokenText
 	    });
 	}
 	
@@ -45,6 +49,11 @@ class SourceDiv extends React.Component {
 	var currentCharToBeHighlighted = this.props.text.substring (this.state.currentlyHighlighted - 1, this.state.currentlyHighlighted);
 	var peekChar = this.props.text.substring (this.state.peekHighlight, this.state.peekHighlight + 1);
 	var restOfSource = this.state.peek ? this.props.text.substring (this.state.currentlyHighlighted + 1) : this.props.text.substring (this.state.currentlyHighlighted);
+
+	if (this.state.wasNewToken) {
+	    
+	    document.querySelector (".token-div").appendChild (<TokenBox color="lightblue" tokenText={this.state.tokenText} />);
+	}
 	
 	return (
 	    <div className={"source-div"}>

@@ -20,18 +20,8 @@ class SourceContainer extends Component {
 
 	    this.setState({scanning : true});
 
-	    
-	    const scanner = new Scanner ();
-	    scanner.scanTokens (document.querySelector (".source-text-area").value);
-	    // Source has now been scanned and tokens lexed out
-	    // Job of interface is to visually replicate the state at every point where there was a change to the state.
 	    console.log (scanner.shelf);
-	    const numOfStates = scanner.shelf.states.getLength ();
-	    for (var i = 0; i < numOfStates; i++) {
-		//const currentState = scanner.shelf.getNextState ();
-		//construct render with corresponding characters highlighted
-	    }
-
+	    
 	}
 
 	this.editAndRestartButtonClicked = () => {
