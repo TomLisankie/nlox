@@ -13,23 +13,63 @@ class SourceContainer extends Component {
 	super (props);
 
 	this.state = {
-	    scanning : false
+	    scanning : false,
+	    shelf : null,
+	    tokens : []
 	};
+
+	this.advanceState = (text, theShelf) => {
+	    if (theShelf != null) {
+		
+		// if (nextState.currentIndex >= document.querySelector (".source-text-area").value) {
+		//     return;
+		// }
+
+		const nextState = theShelf.getNextState ();
+
+		let currentTokens = this.state.tokens;
+		if (this.props.wasNewToken) {
+		    currentTokens.push (this.props.tokenText)
+		    console.log ("Current Tokens: ", currentTokens);
+		}
+		
+		this.setState ({
+		    scanning : true,
+		    shelf : theShelf,
+		    currentState : nextState,
+		    text : text,
+		    tokens : currentTokens
+		});
+		
+	    }
+	}
 
 	this.scanButtonClicked = () => {
 
-	    this.setState({scanning : true});
+	    const scanner = new Scanner ();
+	    const textAreaVal = document.querySelector(".source-text-area").value;
+	    scanner.scanTokens (textAreaVal);
 
-	    console.log (scanner.shelf);
+	    this.advanceStateInterval = setInterval (() => this.advanceState (textAreaVal, scanner.shelf), 500);
 	    
 	}
-
+	
 	this.editAndRestartButtonClicked = () => {
-	    this.setState ({scanning : false});
+
+	    clearInterval (this.advanceStateInterval);
+	    this.setState ({
+		scanning : false,
+		shelf : null
+	    });
 	}
     }
 
+    componentWillUnmount () {
+	clearInterval (this.advanceStateInterval);
+    }
+
     render () {
+	
 	return (
 	    <div id="page">
 	      <div id="source-container" className="col-md-6">
@@ -37,7 +77,7 @@ class SourceContainer extends Component {
 		    this.state.scanning ?
 			<div className="scanning">
 			      <SourceDiv
-				    text={document.querySelector(".source-text-area").value} initiallyHighlightedIndex={1}/>
+				    text={this.state.text} currentHighlightIndex={this.state.currentState.currentIndex} peek={this.state.currentState.peeked} peekIndex={this.state.currentState.peekIndex} />
 				  <Button
 					onClickFunc={this.editAndRestartButtonClicked}
 					text={"Edit source and restart"} />
@@ -58,7 +98,7 @@ class SourceContainer extends Component {
 		{
 		    this.state.scanning ?
 			<div className="scanned-tokens">
-			      <TokenDiv />
+			      <TokenDiv tokens={this.state.tokens} />
 			    </div>
 			    :
 			    <div className="no-scanned">
